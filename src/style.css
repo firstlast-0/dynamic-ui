@@ -6,3 +6,58 @@ body {
     font-family: 'Courier New', monospace;    
     text-align: center;
 }
+
+/* Drop down menu
+#main {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: auto 100px;
+    gap: 10px;
+    padding-top: 50px;
+}
+
+#items {
+    background-color: black;
+    width: 135px;    
+    transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;    
+    z-index: -1;
+}
+
+#items2 {
+    background-color: #303030;
+    width: 135px;    
+    transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;    
+    z-index: -1;
+}
+
+.dropDownContent {    
+    position: absolute;
+    top: 15px;
+    opacity: 0;
+}
+
+.clicked {
+    transform: translate(0, 50px);
+    opacity: 1;
+} */
+
+
+nav {
+    background-color: rgb(126, 123, 123);
+}
+
+ul {
+    box-sizing: border-box;
+    height: 50px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(4, 1fr);    
+    list-style-type: none;
+    padding: 0;
+    padding-top: 15px;
+    margin: 0;
+}
+
+.selected {
+    border-bottom: 3px solid blue;
+}
