@@ -39,17 +39,28 @@ let slider = document.querySelector('#container div');
 left.addEventListener('click', () => {
     let sliderStyle = getComputedStyle(slider);
     let rightValue = sliderStyle.getPropertyValue("right").replace("px", "");    
-    if (rightValue === '15') slider.style.right = "735px";        
-    else slider.style.right = (Number(rightValue) - 360) + "px";
-    selectNavDot();    
+    if (rightValue === '15') {
+        slider.style.right = "735px";
+        selectNavDot("735px");
+    }
+    else {
+        slider.style.right = (Number(rightValue) - 360) + "px";        
+        selectNavDot((Number(rightValue) - 360) + "px");
+    }
+        
 });
 
 right.addEventListener('click', () => {
     let sliderStyle = getComputedStyle(slider);
     let rightValue = sliderStyle.getPropertyValue("right").replace("px", "");
-    if (rightValue === '735') slider.style.right = "15px";
-    else slider.style.right = (Number(rightValue) + 360) + "px";
-    selectNavDot();
+    if (rightValue === '735') {
+        slider.style.right = "15px";
+        selectNavDot("15px");
+    }
+    else {
+        slider.style.right = (Number(rightValue) + 360) + "px";
+        selectNavDot((Number(rightValue) + 360) + "px");
+    }    
 });
 
 let offset = 15;
@@ -61,7 +72,7 @@ for (let i = 0; i < images.length; i++) {
     let offsetVal = offset + "px";
     div.addEventListener('click', () => {
         slider.style.right = offsetVal;
-
+        selectNavDot(offsetVal);
         // let divs = [...document.querySelectorAll('#navDots div')];
         // for (let item of divs) item.classList.remove('selected');        
         // div.classList.toggle('selected');
@@ -70,20 +81,31 @@ for (let i = 0; i < images.length; i++) {
     offset += 360;
 }
 
-function selectNavDot() {
-    let sliderStyle = getComputedStyle(slider);
+function selectNavDot(offset) {
     let divs = [...document.querySelectorAll('#navDots div')];
     for (let item of divs) item.classList.remove('selected');
 
-    if (sliderStyle.getPropertyValue("right") === '15px') {
+    if (offset === '15px') {
         let div = document.querySelector("div[data-index='0']");        
         div.classList.toggle('selected');
-    } else if (sliderStyle.getPropertyValue("right") === '375px') {
+    } else if (offset === '375px') {
         let div = document.querySelector("div[data-index='1']");
         div.classList.toggle('selected');
-    } else if (sliderStyle.getPropertyValue("right") === '735px') {
+    } else if (offset === '735px') {
         let div = document.querySelector("div[data-index='2']");
         div.classList.toggle('selected');
     }
 }
-selectNavDot();
+selectNavDot('15px');
+setInterval(() => {
+    let sliderStyle = getComputedStyle(slider);
+    let rightValue = sliderStyle.getPropertyValue("right").replace("px", "");
+    if (rightValue === '735') {
+        slider.style.right = "15px";
+        selectNavDot("15px");
+    }
+    else {
+        slider.style.right = (Number(rightValue) + 360) + "px";
+        selectNavDot((Number(rightValue) + 360) + "px");
+    }
+}, 5000);
